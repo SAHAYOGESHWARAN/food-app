@@ -30,3 +30,33 @@ function updateTotalPrice() {
     const totalPrice = quantity * pricePerUnit;
     document.getElementById('total-price').textContent = `Total Price: $${totalPrice.toFixed(2)}`;
 }
+
+document.getElementById('add-food-btn').addEventListener('click', addFood);
+
+function addFood() {
+    const foodNameInput = document.getElementById('food-name');
+    const foodName = foodNameInput.value.trim();
+
+    if (foodName) {
+        const foodList = document.getElementById('food-list');
+
+        // Create list item
+        const li = document.createElement('li');
+        li.textContent = foodName;
+
+        // Create remove button
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.addEventListener('click', () => {
+            foodList.removeChild(li);
+        });
+
+        li.appendChild(removeButton);
+        foodList.appendChild(li);
+
+        // Clear input
+        foodNameInput.value = '';
+    } else {
+        alert('Please enter a food name.');
+    }
+}
